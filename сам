@@ -1,0 +1,38 @@
+#include <stdint.h>
+// size_t - функции библиотеки stdint
+// SIZE_MAX
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+static const char delims[] = "\t\n\r ";
+int main()
+{
+    char s[200];
+    printf("enter a String: ");
+    char* res = fgets(s, 200, stdin);
+    char* min_word1 = NULL;
+    char* min_word2 = NULL;
+    size_t min_2 = SIZE_MAX;
+    size_t min_1 = SIZE_MAX;
+    for (char* word = strtok(s, delims);
+        word != NULL;
+        word = strtok(NULL, delims)) 
+    {
+        size_t len = strlen(word);
+        if (len < min_1) 
+        {
+            min_2 = min_1;
+            min_word2 = min_word1;
+            min_1 = len;
+            min_word1 = word;
+        }
+        else 
+            if (len < min_2) 
+            {
+            min_2 = len;
+            min_word2 = word;
+            }
+    }
+    printf("result: %s\n", min_word2);
+    return 0;
+}
